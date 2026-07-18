@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>License Key Generator — Sirf Aapke Liye</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a56db'/%3E%3Cpath d='M16 5L27 11.5H5L16 5Z' fill='white'/%3E%3Crect x='7' y='13' width='2.4' height='9' fill='white'/%3E%3Crect x='12.3' y='13' width='2.4' height='9' fill='white'/%3E%3Crect x='17.6' y='13' width='2.4' height='9' fill='white'/%3E%3Crect x='22.9' y='13' width='2.4' height='9' fill='white'/%3E%3Crect x='5' y='23' width='22' height='2.4' rx='1' fill='white'/%3E%3Ccircle cx='25' cy='8' r='4.2' fill='%2334d399' stroke='white' stroke-width='1.3'/%3E%3Cpath d='M22.8 8h3.6M24.6 6.1l1.9 1.9-1.9 1.9' stroke='white' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #f5f6fa; --white: #ffffff; --primary: #1a56db; --primary-dark: #1341aa;
+    --primary-light: #ebf0ff; --success: #0d9f6e; --success-bg: #e6f9f3;
+    --danger: #c81e1e; --danger-bg: #fde8e8; --text: #111827; --text2: #4b5563;
+    --text3: #9ca3af; --border: #e5e7eb; --border2: #d1d5db;
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .box { background: white; border-radius: 16px; max-width: 460px; width: 100%; padding: 32px 28px; box-shadow: var(--shadow-md); }
+  .box h1 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .warn { background: var(--danger-bg); color: var(--danger); font-size: 12.5px; font-weight: 600; padding: 10px 12px; border-radius: 8px; margin-bottom: 20px; line-height: 1.5; }
+  .field { margin-bottom: 16px; }
+  .field label { font-size: 13px; font-weight: 600; color: var(--text2); display: block; margin-bottom: 5px; }
+  .field input { width: 100%; padding: 12px 14px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; outline: none; }
+  .field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+  .field-error { display: none; font-size: 12px; color: var(--danger); font-weight: 600; margin-top: 5px; }
+  .field-error.show { display: block; }
+  .btn { width: 100%; padding: 13px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 4px; }
+  .btn:hover { background: var(--primary-dark); }
+  .result { display: none; margin-top: 22px; padding: 18px; background: var(--success-bg); border-radius: 10px; text-align: center; }
+  .result.show { display: block; }
+  .result .key { font-size: 22px; font-weight: 800; color: var(--success); letter-spacing: 1px; margin: 8px 0; font-family: monospace; }
+  .result .hint { font-size: 12px; color: var(--text2); }
+  .copy-btn { background: white; border: 1px solid var(--success); color: var(--success); padding: 6px 14px; border-radius: 6px; font-size: 12.5px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+  .wa-send-btn { width: 100%; padding: 12px; background: #25d366; color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; }
+  .wa-send-btn:hover { background: #1fb855; }
+
+  .terms-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .terms-section h3 { font-size: 13px; font-weight: 700; color: var(--text2); margin-bottom: 8px; text-align: center; }
+  .terms-section ul { list-style: none; padding: 0; }
+  .terms-section li { font-size: 11.5px; color: var(--text3); line-height: 1.6; padding-left: 14px; position: relative; margin-bottom: 3px; }
+  .terms-section li::before { content: '•'; position: absolute; left: 0; color: var(--text3); }
+
+  /* REVENUE TRACKER */
+  .revenue-card { display: flex; gap: 10px; margin-bottom: 14px; }
+  .revenue-item { flex: 1; background: var(--primary-light); border-radius: 10px; padding: 12px 14px; text-align: center; }
+  .revenue-label { font-size: 11px; font-weight: 600; color: var(--text2); margin-bottom: 4px; }
+  .revenue-value { font-size: 19px; font-weight: 800; color: var(--primary); }
+
+  /* RECORDS TOOLBAR */
+  .records-toolbar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .toolbar-btn { flex: 1; min-width: 130px; padding: 9px 10px; background: white; border: 1px solid var(--border2); color: var(--text2); border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .toolbar-btn:hover { background: #f3f4f6; }
+  .toolbar-btn-wa { border-color: #25d366; color: #1a9c4b; }
+  .toolbar-btn-wa:hover { background: #e9fbf1; }
+
+  /* CUSTOMER RECORDS */
+  .records-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .records-section h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+  .records-search { border: 1px solid var(--border2); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; outline: none; width: 100%; margin-bottom: 12px; }
+  .records-search:focus { border-color: var(--primary); }
+  .records-count { font-size: 12px; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 2px 9px; border-radius: 20px; }
+  .no-records { font-size: 12.5px; color: var(--text3); text-align: center; padding: 14px 0; }
+  .no-records.hidden { display: none; }
+  .records-list { display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; }
+  .records-list.hidden { display: none; }
+  .record-item { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; background: #fafafa; }
+  .record-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .record-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+  .record-mobile { font-size: 12px; color: var(--text2); margin-top: 1px; }
+  .record-del { background: none; border: none; color: var(--text3); font-size: 14px; cursor: pointer; padding: 2px 4px; flex-shrink: 0; }
+  .record-del:hover { color: var(--danger); }
+  .record-key { font-family: monospace; font-size: 13px; font-weight: 700; color: var(--primary); margin: 8px 0 6px; letter-spacing: 0.5px; }
+  .record-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .record-gendate { font-size: 11px; color: var(--text3); }
+  .record-days { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+  .record-days.active { background: var(--success-bg); color: var(--success); }
+  .record-days.soon { background: #fef3c7; color: #92400e; }
+  .record-days.expired { background: var(--danger-bg); color: var(--danger); }
+  .record-renew-btn { background: white; border: 1px solid var(--primary); color: var(--primary); padding: 5px 11px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; }
+  .record-renew-btn:hover { background: var(--primary-light); }
+
+  /* BULK REMINDER MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(17,24,39,0.55); z-index: 800; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.show { display: flex; }
+  .modal-box { background: white; border-radius: 14px; max-width: 420px; width: 100%; max-height: 82vh; display: flex; flex-direction: column; overflow: hidden; }
+  .modal-head { padding: 16px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .modal-head h3 { font-size: 14.5px; font-weight: 700; }
+  .modal-close { background: none; border: none; font-size: 18px; color: var(--text3); cursor: pointer; }
+  .modal-list { overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .modal-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+  .modal-row-info { min-width: 0; }
+  .modal-row-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .modal-row-meta { font-size: 11px; color: var(--text3); margin-top: 1px; }
+  .modal-send-btn { flex-shrink: 0; background: #25d366; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .modal-send-btn:hover { background: #1fb855; }
+  .modal-send-btn.sent { background: var(--border2); color: var(--text2); cursor: default; }
+  .modal-foot { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text3); text-align: center; }
+
+  /* LANGUAGE SWITCHER */
+  .lang-switcher { position: fixed; top: 12px; right: 14px; z-index: 600; }
+  .lang-switcher select { background: white; border: 1.5px solid var(--border2); color: var(--text); font-size: 12.5px; font-weight: 700; padding: 6px 10px; border-radius: 20px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); outline: none; }
+  .lang-switcher select:focus { border-color: var(--primary); }
+  @media (max-width: 480px) { .lang-switcher { top: 8px; right: 8px; } .lang-switcher select { font-size: 11.5px; padding: 5px 8px; } }
+</style>
+</head>
+<body>
+
+<div class="lang-switcher">
+  <select id="langSwitcher" onchange="setLanguage(this.value)">
+    <option value="en">🌐 English</option>
+    <option value="hi">🌐 हिन्दी</option>
+    <option value="gu">🌐 ગુજરાતી</option>
+  </select>
+</div>
+
+<div class="box">
+  <h1 style="display:flex; align-items:center; gap:8px;">
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+      <rect width="32" height="32" rx="8" fill="#1a56db"/>
+      <path d="M16 5L27 11.5H5L16 5Z" fill="white"/>
+      <rect x="7" y="13" width="2.4" height="9" fill="white"/>
+      <rect x="12.3" y="13" width="2.4" height="9" fill="white"/>
+      <rect x="17.6" y="13" width="2.4" height="9" fill="white"/>
+      <rect x="22.9" y="13" width="2.4" height="9" fill="white"/>
+      <rect x="5" y="23" width="22" height="2.4" rx="1" fill="white"/>
+      <circle cx="25" cy="8" r="4.2" fill="#34d399" stroke="white" stroke-width="1.3"/>
+      <path d="M22.8 8h3.6M24.6 6.1l1.9 1.9-1.9 1.9" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span data-i18n="pageH1">🔑 License Key Generator</span>
+  </h1>
+  <div class="warn" data-i18n="warnText">⚠️ Ye file SIRF aapke (HP) liye hai. Isko kisi customer ko mat bhejna — koi bhi isse apni khud ki license key bana sakta hai.</div>
+
+  <div class="field">
+    <label data-i18n="nameLabel">Customer Ka Naam (optional)</label>
+    <input id="custName" type="text" placeholder="Rahul Sharma">
+  </div>
+
+  <div class="field">
+    <label data-i18n="mobileLabel">Customer Ka Mobile Number (jisne payment kiya)</label>
+    <input id="custMobile" type="tel" placeholder="98765 43210" maxlength="10" inputmode="numeric">
+    <div class="field-error" id="mobileError" data-i18n="mobileErrorText">Sahi 10-digit mobile number daalein</div>
+  </div>
+
+  <button class="btn" onclick="generate()" data-i18n="generateBtn">License Key Banayein</button>
+
+  <div class="result" id="resultBox">
+    <div class="hint" data-i18n="resultHint">Is customer ki License Key:</div>
+    <div class="key" id="generatedKey">----</div>
+    <button class="copy-btn" onclick="copyKey()" data-i18n="copyBtn">📋 Copy Karein</button>
+    <button class="wa-send-btn" onclick="sendViaWhatsApp()" data-i18n="waSendBtn">WhatsApp Pe Customer Ko Bhejein</button>
+  </div>
+
+  <div class="records-section">
+    <h3>
+      <span data-i18n="recordsHeader">👥 Customer Records</span>
+      <span class="records-count" id="recordsCount">0</span>
+    </h3>
+
+    <div class="revenue-card" id="revenueCard">
+      <div class="revenue-item">
+        <div class="revenue-label" data-i18n="revenueActiveLabel">Active Customers</div>
+        <div class="revenue-value" id="revenueActiveCount">0</div>
+      </div>
+      <div class="revenue-item">
+        <div class="revenue-label" data-i18n="revenueMonthlyLabel">Est. Monthly Revenue</div>
+        <div class="revenue-value" id="revenueAmount">₹0</div>
+      </div>
+    </div>
+
+    <div class="records-toolbar">
+      <button class="toolbar-btn" onclick="exportRecordsToCSV()" data-i18n="exportCsvBtn">⬇️ Export CSV</button>
+      <button class="toolbar-btn toolbar-btn-wa" onclick="bulkRemindExpiring()" data-i18n="bulkReminderBtn">📢 Remind Expiring (5 din)</button>
+    </div>
+
+    <input class="records-search" id="recordsSearch" type="text" data-i18n-placeholder="searchPh" placeholder="🔍 Naam ya mobile se search karein..." oninput="renderRecords()">
+    <div class="no-records" id="noRecords" data-i18n="noRecordsText">Abhi tak koi customer record nahi hai.</div>
+    <div class="records-list" id="recordsList"></div>
+  </div>
+
+  <div class="modal-overlay" id="reminderModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 data-i18n="bulkReminderBtn">📢 Remind Expiring (5 days)</h3>
+        <button class="modal-close" onclick="closeReminderModal()">✕</button>
+      </div>
+      <div class="modal-list" id="reminderModalList"></div>
+      <div class="modal-foot" data-i18n="reminderModalHint">Har customer ke liye "Send" par tap karein — WhatsApp browsers ek saath kai chats khulne nahi dete, isliye ek-ek karke bhejna padta hai.</div>
+    </div>
+  </div>
+
+  <div class="terms-section">
+    <h3 data-i18n="termsHeader">📋 Terms &amp; Conditions</h3>
+    <ul>
+      <li data-i18n="termsLi1">Ye software AI (Artificial Intelligence) se banaya gaya hai.</li>
+      <li data-i18n="termsLi2">Ek baar mein maximum 5 page tak ki entries hi process ki ja sakti hain.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CRITICAL: Ye LICENSE_SECRET bilkul wahi hona chahiye jo
+// bank_to_tally.html file mein hai, warna generated keys kabhi
+// match nahi karengi aur koi bhi unlock nahi hoga.
+// ============================================================
+const LICENSE_SECRET = "HP-BANKTOTALLY-2026-SECRET";
+const LICENSE_VALID_DAYS = 30; // must match bank_to_tally.html
+const RECORDS_STORAGE_KEY = "btt_customer_records";
+const SUBSCRIPTION_AMOUNT = 99; // must match bank_to_tally.html SUBSCRIPTION_AMOUNT
+
+// ============ LANGUAGE SYSTEM (English / Hindi / Gujarati) ============
+const TRANSLATIONS = {
+  pageH1:          { en: "🔑 License Key Generator", hi: "🔑 License Key Generator", gu: "🔑 લાયસન્સ કી જનરેટર" },
+  warnText:        { en: "⚠️ This file is ONLY for you (HP). Never send this to a customer — anyone with it can generate their own license key.", hi: "⚠️ Ye file SIRF aapke (HP) liye hai. Isko kisi customer ko mat bhejna — koi bhi isse apni khud ki license key bana sakta hai.", gu: "⚠️ આ ફાઇલ ફક્ત તમારા (HP) માટે છે. તેને ક્યારેય કોઈ ગ્રાહકને ન મોકલો — કોઈ પણ તેનાથી પોતાની લાયસન્સ કી બનાવી શકે છે." },
+  nameLabel:       { en: "Customer Name (optional)", hi: "Customer Ka Naam (optional)", gu: "ગ્રાહકનું નામ (વૈકલ્પિક)" },
+  mobileLabel:     { en: "Customer Mobile Number (used for payment)", hi: "Customer Ka Mobile Number (jisne payment kiya)", gu: "ગ્રાહકનો મોબાઇલ નંબર (જેણે પેમેન્ટ કર્યું)" },
+  mobileErrorText: { en: "Please enter a valid 10-digit mobile number", hi: "Sahi 10-digit mobile number daalein", gu: "કૃપા કરી માન્ય 10-અંકનો મોબાઇલ નંબર દાખલ કરો" },
+  generateBtn:     { en: "Generate License Key", hi: "License Key Banayein", gu: "લાયસન્સ કી બનાવો" },
+  resultHint:      { en: "This customer's License Key:", hi: "Is customer ki License Key:", gu: "આ ગ્રાહકની લાયસન્સ કી:" },
+  copyBtn:         { en: "📋 Copy", hi: "📋 Copy Karein", gu: "📋 કૉપિ કરો" },
+  waSendBtn:       { en: "Send to Customer via WhatsApp", hi: "WhatsApp Pe Customer Ko Bhejein", gu: "WhatsApp પર ગ્રાહકને મોકલો" },
+  recordsHeader:   { en: "👥 Customer Records", hi: "👥 Customer Records", gu: "👥 ગ્રાહક રેકોર્ડ્સ" },
+  searchPh:        { en: "🔍 Search by name or mobile...", hi: "🔍 Naam ya mobile se search karein...", gu: "🔍 નામ અથવા મોબાઇલથી શોધો..." },
+  noRecordsText:   { en: "No customer records yet.", hi: "Abhi tak koi customer record nahi hai.", gu: "હજુ સુધી કોઈ ગ્રાહક રેકોર્ડ નથી." },
+  noMatchText:     { en: "No matches found.", hi: "Koi match nahi mila.", gu: "કોઈ મેચ મળ્યો નથી." },
+  noNameGiven:     { en: "No Name Given", hi: "Naam Nahi Diya", gu: "નામ આપ્યું નથી" },
+  generatedPrefix: { en: "Generated: ", hi: "Generated: ", gu: "જનરેટ થયું: " },
+  daysLeftSuffix:  { en: " days left", hi: " din baaki", gu: " દિવસ બાકી" },
+  expiredText:     { en: "Expired", hi: "Expired", gu: "સમાપ્ત" },
+  renewBtn:        { en: "🔄 Renew", hi: "🔄 Renew Karein", gu: "🔄 રિન્યુ કરો" },
+  deleteTooltip:   { en: "Delete", hi: "Delete", gu: "ડિલીટ કરો" },
+  deleteConfirm:   { en: "Are you sure you want to delete this customer's record?", hi: "Kya aap is customer ka record delete karna chahte hain?", gu: "શું તમે આ ગ્રાહકનો રેકોર્ડ ડિલીટ કરવા માંગો છો?" },
+  copyAlert:       { en: "Key copied!", hi: "Key copy ho gayi!", gu: "કી કૉપિ થઈ ગઈ!" },
+  termsHeader:     { en: "📋 Terms & Conditions", hi: "📋 Terms & Conditions", gu: "📋 નિયમો અને શરતો" },
+  termsLi1:        { en: "This software is built using AI (Artificial Intelligence).", hi: "Ye software AI (Artificial Intelligence) se banaya gaya hai.", gu: "આ સોફ્ટવેર AI (Artificial Intelligence) નો ઉપયોગ કરીને બનાવવામાં આવ્યું છે." },
+  termsLi2:        { en: "A maximum of 5 pages of entries can be processed at a time.", hi: "Ek baar mein maximum 5 page tak ki entries hi process ki ja sakti hain.", gu: "એક સમયે વધુમાં વધુ 5 પેજ સુધીની એન્ટ્રીઓ જ પ્રોસેસ કરી શકાય છે." },
+  revenueActiveLabel: { en: "Active Customers", hi: "Active Customers", gu: "સક્રિય ગ્રાહકો" },
+  revenueMonthlyLabel: { en: "Est. Monthly Revenue", hi: "Est. Monthly Revenue", gu: "અંદાજિત માસિક આવક" },
+  exportCsvBtn:    { en: "⬇️ Export CSV", hi: "⬇️ CSV Export Karein", gu: "⬇️ CSV એક્સપોર્ટ કરો" },
+  bulkReminderBtn: { en: "📢 Remind Expiring (5 days)", hi: "📢 Expiring Wale Ko Yaad Dilayein (5 din)", gu: "📢 સમાપ્ત થતાં ગ્રાહકોને યાદ અપાવો (5 દિવસ)" },
+  noExpiringAlert: { en: "No customers expiring within 5 days.", hi: "5 din ke andar koi customer expire nahi ho raha.", gu: "5 દિવસમાં કોઈ ગ્રાહકની મુદત પૂરી થતી નથી." },
+  bulkReminderConfirm: { en: "This will open {n} WhatsApp chat(s), one by one. Continue?", hi: "Isse {n} WhatsApp chat ek-ek karke khulengi. Continue karein?", gu: "આનાથી {n} WhatsApp ચેટ એક પછી એક ખુલશે. ચાલુ રાખવું છે?" },
+  reminderModalHint: { en: "Tap \"Send\" for each customer — browsers block multiple WhatsApp chats opening at once, so they need to be sent one at a time.", hi: "Har customer ke liye \"Send\" par tap karein — WhatsApp browsers ek saath kai chats khulne nahi dete, isliye ek-ek karke bhejna padta hai.", gu: "દરેક ગ્રાહક માટે \"Send\" પર ટેપ કરો — બ્રાઉઝર એકસાથે અનેક WhatsApp ચેટ ખૂલવા દેતું નથી, એટલે એક પછી એક મોકલવું પડે છે." },
+  reminderSentText: { en: "Sent ✓", hi: "Bhej diya ✓", gu: "મોકલાયું ✓" },
+};
+
+function getLanguage() {
+  return localStorage.getItem('btt_lang') || 'en';
+}
+
+function t(key) {
+  const lang = getLanguage();
+  const entry = TRANSLATIONS[key];
+  if (!entry) return key;
+  return entry[lang] || entry.en || key;
+}
+
+function applyLanguage() {
+  const lang = getLanguage();
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (TRANSLATIONS[key]) el.textContent = TRANSLATIONS[key][lang] || TRANSLATIONS[key].en;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (TRANSLATIONS[key]) el.placeholder = TRANSLATIONS[key][lang] || TRANSLATIONS[key].en;
+  });
+  const switcher = document.getElementById('langSwitcher');
+  if (switcher) switcher.value = lang;
+  renderRecords(); // re-render dynamic record text (badges, "no name", etc.) in new language
+}
+
+function setLanguage(lang) {
+  localStorage.setItem('btt_lang', lang);
+  applyLanguage();
+}
+
+function simpleHash(str) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash + str.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+function generateLicenseKeyForMobile(mobile) {
+  const raw = `${mobile}-${LICENSE_SECRET}`;
+  const hash = simpleHash(raw);
+  const hex = hash.toString(36).toUpperCase().padStart(8, '0');
+  return `${hex.slice(0,4)}-${hex.slice(4,8)}-${mobile.slice(-4)}`;
+}
+
+let currentMobile = '';
+let currentKey = '';
+
+// ============ CUSTOMER RECORDS (localStorage) ============
+function loadRecords() {
+  try {
+    const raw = localStorage.getItem(RECORDS_STORAGE_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveRecords(records) {
+  localStorage.setItem(RECORDS_STORAGE_KEY, JSON.stringify(records));
+}
+
+// Adds a new record, or updates+renews the existing one for the same mobile number.
+function upsertRecord(name, mobile, key) {
+  const records = loadRecords();
+  const now = Date.now();
+  const expiresAt = now + (LICENSE_VALID_DAYS * 24 * 60 * 60 * 1000);
+  const existingIdx = records.findIndex(r => r.mobile === mobile);
+
+  const record = {
+    name: name || (existingIdx > -1 ? records[existingIdx].name : ''),
+    mobile,
+    key,
+    genDate: now,
+    expiresAt
+  };
+
+  if (existingIdx > -1) {
+    records.splice(existingIdx, 1); // remove old position
+  }
+  records.unshift(record); // most recent first
+  saveRecords(records);
+  renderRecords();
+}
+
+function deleteRecord(mobile) {
+  if (!confirm(t('deleteConfirm'))) return;
+  const records = loadRecords().filter(r => r.mobile !== mobile);
+  saveRecords(records);
+  renderRecords();
+}
+
+function renewRecord(mobile) {
+  const records = loadRecords();
+  const rec = records.find(r => r.mobile === mobile);
+  if (!rec) return;
+  document.getElementById('custName').value = rec.name || '';
+  document.getElementById('custMobile').value = rec.mobile;
+  generate();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function formatDate(ts) {
+  const d = new Date(ts);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yy = d.getFullYear();
+  return `${dd}-${mm}-${yy}`;
+}
+
+// Shows exact time (e.g. "04:32 PM") alongside the date, so HP can see
+// kis din AUR kitne baje customer ke liye key generate hui thi.
+function formatTime(ts) {
+  const d = new Date(ts);
+  let h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2, '0');
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12;
+  if (h === 0) h = 12;
+  return `${String(h).padStart(2, '0')}:${m} ${ampm}`;
+}
+
+function formatDateTime(ts) {
+  return `${formatDate(ts)}, ${formatTime(ts)}`;
+}
+
+function daysBadge(expiresAt) {
+  const daysLeft = Math.ceil((expiresAt - Date.now()) / (24 * 60 * 60 * 1000));
+  if (daysLeft <= 0) {
+    return { cls: 'expired', text: t('expiredText') };
+  } else if (daysLeft <= 5) {
+    return { cls: 'soon', text: `${daysLeft}${t('daysLeftSuffix')}` };
+  } else {
+    return { cls: 'active', text: `${daysLeft}${t('daysLeftSuffix')}` };
+  }
+}
+
+function updateRevenueStats(records) {
+  const activeCount = records.filter(r => r.expiresAt > Date.now()).length;
+  document.getElementById('revenueActiveCount').textContent = activeCount;
+  document.getElementById('revenueAmount').textContent = '₹' + (activeCount * SUBSCRIPTION_AMOUNT).toLocaleString('en-IN');
+}
+
+function exportRecordsToCSV() {
+  const records = loadRecords();
+  if (!records.length) {
+    alert(t('noRecordsText'));
+    return;
+  }
+  const header = ['Name', 'Mobile', 'License Key', 'Generated Date', 'Generated Time', 'Expires Date', 'Status'];
+  const rows = records.map(r => {
+    const daysLeft = Math.ceil((r.expiresAt - Date.now()) / (24 * 60 * 60 * 1000));
+    const status = daysLeft <= 0 ? 'Expired' : (daysLeft <= 5 ? 'Expiring Soon' : 'Active');
+    return [
+      (r.name || '').replace(/,/g, ' '),
+      r.mobile,
+      r.key,
+      formatDate(r.genDate),
+      formatTime(r.genDate),
+      formatDate(r.expiresAt),
+      status
+    ];
+  });
+  const csvContent = [header, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `BankToTally_Customers_${formatDate(Date.now())}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// NOTE (bug fix): Earlier this function auto-opened every expiring customer's
+// WhatsApp chat in a loop using setTimeout + window.open. Browsers only allow
+// window.open to bypass the popup blocker when it runs *directly* inside a
+// user click — a setTimeout callback breaks that chain, so Chrome/Edge/Firefox
+// silently blocked every chat after the first one. Fix: show a review list
+// instead, and let a real click send each individual WhatsApp message.
+function bulkRemindExpiring() {
+  const records = loadRecords();
+  const expiring = records.filter(r => {
+    const daysLeft = Math.ceil((r.expiresAt - Date.now()) / (24 * 60 * 60 * 1000));
+    return daysLeft <= 5;
+  }).sort((a, b) => a.expiresAt - b.expiresAt);
+
+  if (!expiring.length) {
+    alert(t('noExpiringAlert'));
+    return;
+  }
+
+  const listEl = document.getElementById('reminderModalList');
+  listEl.innerHTML = expiring.map(r => {
+    const daysLeft = Math.ceil((r.expiresAt - Date.now()) / (24 * 60 * 60 * 1000));
+    const metaText = daysLeft <= 0 ? t('expiredText') : `${daysLeft}${t('daysLeftSuffix')}`;
+    return `
+      <div class="modal-row" id="reminderRow-${r.mobile}">
+        <div class="modal-row-info">
+          <div class="modal-row-name">${escHtml(r.name || t('noNameGiven'))}</div>
+          <div class="modal-row-meta">📱 ${escHtml(r.mobile)} · ${metaText}</div>
+        </div>
+        <button class="modal-send-btn" onclick="sendSingleReminder('${r.mobile}', ${daysLeft}, this)">📤 Send</button>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('reminderModal').classList.add('show');
+}
+
+function sendSingleReminder(mobile, daysLeft, btnEl) {
+  const records = loadRecords();
+  const r = records.find(rec => rec.mobile === mobile);
+  const name = r ? (r.name || '') : '';
+  const msg = daysLeft <= 0
+    ? `Namaste ${name}! Aapka BankToTally subscription expire ho chuka hai. Renew karne ke liye reply karein. 🙏`
+    : `Namaste ${name}! Aapka BankToTally subscription ${daysLeft} din mein expire ho raha hai. Renew karwane ke liye reply karein. 🙏`;
+  const waUrl = `https://wa.me/91${mobile}?text=${encodeURIComponent(msg)}`;
+  // Direct call inside the click handler — this is a genuine user gesture,
+  // so the browser will NOT block this popup (unlike the old setTimeout loop).
+  window.open(waUrl, '_blank');
+  btnEl.textContent = t('reminderSentText');
+  btnEl.classList.add('sent');
+  btnEl.disabled = true;
+}
+
+function closeReminderModal() {
+  document.getElementById('reminderModal').classList.remove('show');
+}
+
+function renderRecords() {
+  const records = loadRecords();
+  const searchEl = document.getElementById('recordsSearch');
+  const searchTerm = (searchEl ? searchEl.value : '').trim().toLowerCase();
+
+  updateRevenueStats(records);
+
+  const filtered = (searchTerm
+    ? records.filter(r =>
+        (r.name || '').toLowerCase().includes(searchTerm) ||
+        (r.mobile || '').includes(searchTerm)
+      )
+    : records.slice()
+  ).sort((a, b) => a.expiresAt - b.expiresAt); // soonest-to-expire (or already expired) first
+
+  document.getElementById('recordsCount').textContent = records.length;
+
+  const listEl = document.getElementById('recordsList');
+  const noRecordsEl = document.getElementById('noRecords');
+
+  if (records.length === 0) {
+    listEl.classList.add('hidden');
+    noRecordsEl.classList.remove('hidden');
+    noRecordsEl.textContent = t('noRecordsText');
+    listEl.innerHTML = '';
+    return;
+  }
+
+  if (filtered.length === 0) {
+    listEl.classList.add('hidden');
+    noRecordsEl.classList.remove('hidden');
+    noRecordsEl.textContent = t('noMatchText');
+    listEl.innerHTML = '';
+    return;
+  }
+
+  noRecordsEl.classList.add('hidden');
+  listEl.classList.remove('hidden');
+
+  listEl.innerHTML = filtered.map(r => {
+    const badge = daysBadge(r.expiresAt);
+    const displayName = escHtml(r.name || t('noNameGiven'));
+    return `
+      <div class="record-item">
+        <div class="record-top">
+          <div>
+            <div class="record-name">${displayName}</div>
+            <div class="record-mobile">📱 ${escHtml(r.mobile)}</div>
+          </div>
+          <button class="record-del" onclick="deleteRecord('${r.mobile}')" title="${t('deleteTooltip')}">🗑️</button>
+        </div>
+        <div class="record-key">${escHtml(r.key)}</div>
+        <div class="record-meta">
+          <span class="record-gendate">${t('generatedPrefix')}${formatDateTime(r.genDate)}</span>
+          <span class="record-days ${badge.cls}">${badge.text}</span>
+        </div>
+        <div style="margin-top:9px;">
+          <button class="record-renew-btn" onclick="renewRecord('${r.mobile}')">${t('renewBtn')}</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function escHtml(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============ GENERATE KEY ============
+function generate() {
+  const name = document.getElementById('custName').value.trim();
+  const mobile = document.getElementById('custMobile').value.trim();
+  const errEl = document.getElementById('mobileError');
+
+  if (!/^[6-9]\d{9}$/.test(mobile)) {
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+
+  currentMobile = mobile;
+  currentKey = generateLicenseKeyForMobile(mobile);
+  document.getElementById('generatedKey').textContent = currentKey;
+  document.getElementById('resultBox').classList.add('show');
+
+  upsertRecord(name, mobile, currentKey);
+}
+
+function copyKey() {
+  navigator.clipboard.writeText(currentKey).then(() => {
+    alert(t('copyAlert'));
+  });
+}
+
+function sendViaWhatsApp() {
+  const text = `Namaste! Aapka BankToTally subscription activate ho gaya hai. 🎉\n\nYe rahi aapki License Key:\n*${currentKey}*\n\nApp mein jaakar apna mobile number (${currentMobile}) aur ye key daal kar unlock kar lein. Ye 30 din ke liye valid hai.`;
+  const waUrl = `https://wa.me/91${currentMobile}?text=${encodeURIComponent(text)}`;
+  window.open(waUrl, '_blank');
+}
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', applyLanguage);
+</script>
+
+</body>
+</html>
